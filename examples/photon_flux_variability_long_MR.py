@@ -167,7 +167,6 @@ plt.show()
 
 # SAVE the RAW DATA (Kevin);  will end up in /examples folder 
 sky_reduced = sky[256-64:256+63,256-64:256+63,:]  # Full sky is too big for github
-# np.save('sky_data', sky)
 np.save('sky_reduced', sky_reduced)
 np.save('htsi_data', htsi_data)
 
