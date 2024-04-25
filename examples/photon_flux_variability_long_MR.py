@@ -151,25 +151,17 @@ if np.min(sky) == 0:
     
 htsi_data = run_flux_simulations(sky, mat_type, order)
 
-# New plot code here (from Massimo)
+#DISPLAY
 import matplotlib.pyplot as plt
 fig = plt.figure()
 i_wavelength = 100  #modify to probe different wl between 0 (400nm) Nand 199 (800nm)
-
 #ORIGINAL:
-plt.imshow(sky[256-64:256+63,256-64:256+63,i_wavelength])
+plt.imshow(sky[256-64:256+63,256-64:256+63,i_wavelength]) 
 plt.show()
-
 #HADAMARD
-plt.imshow(htsi_data[:,:,i_wavelength])
+plt.imshow(htsi_data[:,:,i_wavelength]) 
 plt.tight_layout()
 plt.show()
-
-# SAVE the RAW DATA (Kevin);  will end up in /examples folder 
-sky_reduced = sky[256-64:256+63,256-64:256+63,:]  # Full sky is too big for github
-np.save('sky_reduced', sky_reduced)
-np.save('htsi_data', htsi_data)
-
 sys.exit(1)
 #THIS ENDS MASSIMOS'S VARIANT
 
