@@ -151,12 +151,15 @@ class HTSI_Models():
     
     def htsi(self, sky, order, slit_width, DMD_contrast, CCD):
         H = hadamard(order, dtype='float64') # Generates the Hadamard matrix
+        H = hadamard(order, dtype=np.longdouble) # Generates the Hadamard matrix #KJK
         c1 = 1 - np.divide(1,DMD_contrast) # Accounts for singular value of DMD contrast
         c2 = 0 + np.divide(1,DMD_contrast) # Accounts for singular value of DMD contrast
         if slit_width > 1:
             sky = self.adjust_spatial_resolution(sky, slit_width)
         D_ccd = np.zeros((np.shape(sky)[0],np.shape(sky)[2],order))
+        D_ccd = np.zeros((np.shape(sky)[0],np.shape(sky)[2],order), dtype=np.longdouble) #KJK
         dark_frames = np.zeros(np.shape(D_ccd))
+        dark_frames = np.zeros(np.shape(D_ccd), dtype=np.longdouble) #KJK)
         y1, y2 = int((np.shape(sky)[0]/2)-(order/2)), int((np.shape(sky)[0]/2)+(order/2))
         t, dt, num_pix, rn, gain, max_adu = CCD[0],CCD[1],CCD[2],CCD[3],CCD[4],CCD[5]
         
@@ -215,6 +218,7 @@ class HTSI_Models():
         HD = np.matmul(H, flat_data) # Inverse Hadmard transform
         # Data reconstruction
         htsi_data = np.zeros((x,np.shape(D)[2],y)) # The final reconstructed data cube from HTSI
+        htsi_data = np.zeros((x,np.shape(D)[2],y), dtype=np.longdouble) # The final reconstructed data cube from HTSI #KJK
         for ii in range(0,order):
             row = HD[ii,:]
             img = np.reshape(row,(x,y))
